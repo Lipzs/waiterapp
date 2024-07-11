@@ -4,29 +4,29 @@ import {
   MenuContainer,
   Footer,
   FooterContainer,
-  CenteredContainer
-} from './styles';
+  CenteredContainer,
+} from "./styles";
 
-import { Header } from '../components/Header';
-import { Categories } from '../components/Categories';
-import { Menu } from '../components/Menu';
-import { Button } from '../components/Button';
-import { TableModal } from '../components/TableModal';
-import { useEffect, useState } from 'react';
-import { CartItem } from '../types/CartItem';
-import { Cart } from '../components/Cart';
-import { Product } from '../types/Product';
-import { ActivityIndicator } from 'react-native';
+import { Header } from "../components/Header";
+import { Categories } from "../components/Categories";
+import { Menu } from "../components/Menu";
+import { Button } from "../components/Button";
+import { TableModal } from "../components/TableModal";
+import { useEffect, useState } from "react";
+import { CartItem } from "../types/CartItem";
+import { Cart } from "../components/Cart";
+import { Product } from "../types/Product";
+import { ActivityIndicator } from "react-native";
 
-import { Empty } from '../components/Icons/Empty';
-import { Text } from '../components/Text';
-import { Category } from '../types/Category';
+import { Empty } from "../components/Icons/Empty";
+import { Text } from "../components/Text";
+import { Category } from "../types/Category";
 
-import { api } from '../utils/api';
+import { api } from "../utils/api";
 
 export function Main() {
   const [isTableModalVisible, setIsTableModalVisible] = useState(false);
-  const [selectedTable, setSelectedTable] = useState('');
+  const [selectedTable, setSelectedTable] = useState("");
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [products, setProducts] = useState<Product[]>([]);
@@ -34,20 +34,19 @@ export function Main() {
   const [isLoadingProducts, setIsLoadingProducts] = useState(false);
 
   useEffect(() => {
-    Promise.all([
-      api.get('/categories'),
-      api.get('/products')
-    ]).then(([categoriesResponse, productsResponse]) => {
-      setCategories(categoriesResponse.data);
-      setProducts(productsResponse.data);
+    Promise.all([api.get("/categories"), api.get("/products")]).then(
+      ([categoriesResponse, productsResponse]) => {
+        setCategories(categoriesResponse.data);
+        setProducts(productsResponse.data);
 
-      setIsLoading(false);
-    });
+        setIsLoading(false);
+      },
+    );
   }, []);
 
   async function handleSelectCategory(categoryId: string) {
     const route = !categoryId
-      ? '/products'
+      ? "/products"
       : `/categories/${categoryId}/products`;
 
     setIsLoadingProducts(true);
@@ -63,7 +62,7 @@ export function Main() {
   }
 
   function handleResetOrder() {
-    setSelectedTable('');
+    setSelectedTable("");
     setCartItems([]);
   }
 
@@ -74,13 +73,13 @@ export function Main() {
 
     setCartItems((prevState) => {
       const itemIndex = prevState.findIndex(
-        cartItem => cartItem.product._id === product._id
+        (cartItem) => cartItem.product._id === product._id,
       );
 
       if (itemIndex < 0) {
         return prevState.concat({
           quantity: 1,
-          product
+          product,
         });
       }
 
@@ -89,7 +88,7 @@ export function Main() {
 
       newCartItems[itemIndex] = {
         ...item,
-        quantity: item.quantity + 1
+        quantity: item.quantity + 1,
       };
 
       return newCartItems;
@@ -99,7 +98,7 @@ export function Main() {
   function handleDecrementCartItem(product: Product) {
     setCartItems((prevState) => {
       const itemIndex = prevState.findIndex(
-        cartItem => cartItem.product._id === product._id
+        (cartItem) => cartItem.product._id === product._id,
       );
 
       const item = prevState[itemIndex];
@@ -113,7 +112,7 @@ export function Main() {
 
       newCartItems[itemIndex] = {
         ...item,
-        quantity: item.quantity - 1
+        quantity: item.quantity - 1,
       };
 
       return newCartItems;
@@ -130,7 +129,7 @@ export function Main() {
 
         {isLoading ? (
           <CenteredContainer>
-            <ActivityIndicator color='#d73035' size='large' />
+            <ActivityIndicator color="#d73035" size="large" />
           </CenteredContainer>
         ) : (
           <>
@@ -143,21 +142,20 @@ export function Main() {
 
             {isLoadingProducts ? (
               <CenteredContainer>
-                <ActivityIndicator color='#d73035' size='large' />
+                <ActivityIndicator color="#d73035" size="large" />
               </CenteredContainer>
             ) : (
               <>
                 {products.length > 0 ? (
                   <MenuContainer>
-                    <Menu
-                      onAddToCart={handleAddToCart}
-                      products={products}
-                    />
+                    <Menu onAddToCart={handleAddToCart} products={products} />
                   </MenuContainer>
                 ) : (
                   <CenteredContainer>
                     <Empty />
-                    <Text color='#666' style={{ marginTop: 24 }}>Nenhum produto foi encontrado!</Text>
+                    <Text color="#666" style={{ marginTop: 24 }}>
+                      Nenhum produto foi encontrado!
+                    </Text>
                   </CenteredContainer>
                 )}
               </>

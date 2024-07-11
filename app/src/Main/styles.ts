@@ -1,10 +1,10 @@
-import styled from 'styled-components/native';
-import { Platform, StatusBar } from 'react-native';
+import styled from "styled-components/native";
+import { Platform, StatusBar } from "react-native";
 
-const isAndroid = Platform.OS === 'android';
+const isAndroid = Platform.OS === "android";
 
 export const Container = styled.SafeAreaView`
-  margin-top: ${isAndroid ? `${StatusBar.currentHeight}px` : '0'};
+  margin-top: ${isAndroid ? `${StatusBar.currentHeight}px` : "0"};
   flex: 1;
   background: #fafafa;
 `;
@@ -31,5 +31,3 @@ export const CenteredContainer = styled.View`
   justify-content: center;
   flex: 1;
 `;
-
-

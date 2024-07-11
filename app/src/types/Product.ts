@@ -5,8 +5,8 @@ export interface Product {
   imagePath: string;
   price: number;
   ingredients: {
-      name: string;
-      icon: string;
-      _id: string;
+    name: string;
+    icon: string;
+    _id: string;
   }[];
 }

@@ -1,19 +1,19 @@
-import { FlatList } from 'react-native';
+import { FlatList } from "react-native";
 
 import {
   ProductContainer,
   ProductImage,
   ProductDetails,
   Separator,
-  AddToCartButton
-} from './styles';
+  AddToCartButton,
+} from "./styles";
 
-import { Text } from '../Text';
-import { formatCurrency } from '../../utils/formatCurrency';
-import { PlusCircle } from '../Icons/PlusCircle';
-import { ProductModal } from '../ProductModal';
-import { useState } from 'react';
-import { Product } from '../../types/Product';
+import { Text } from "../Text";
+import { formatCurrency } from "../../utils/formatCurrency";
+import { PlusCircle } from "../Icons/PlusCircle";
+import { ProductModal } from "../ProductModal";
+import { useState } from "react";
+import { Product } from "../../types/Product";
 
 interface MenuProps {
   onAddToCart: (product: Product) => void;
@@ -43,21 +43,23 @@ export function Menu({ onAddToCart, products }: MenuProps) {
         data={products}
         style={{ marginTop: 32 }}
         contentContainerStyle={{ paddingHorizontal: 24 }}
-        keyExtractor={product => product._id}
+        keyExtractor={(product) => product._id}
         renderItem={({ item: product }) => (
           <ProductContainer onPress={() => handleOpenModal(product)}>
             <ProductImage
               source={{
-                uri: `http://192.168.10.3:3001/uploads/${product.imagePath}`
+                uri: `http://192.168.10.3:3001/uploads/${product.imagePath}`,
               }}
             />
 
             <ProductDetails>
-              <Text weight='600'>{product.name}</Text>
-              <Text size={14} color='#666' style={{ marginVertical: 8 }}>
+              <Text weight="600">{product.name}</Text>
+              <Text size={14} color="#666" style={{ marginVertical: 8 }}>
                 {product.description}
               </Text>
-              <Text size={14} weight='600'>{formatCurrency(product.price)}</Text>
+              <Text size={14} weight="600">
+                {formatCurrency(product.price)}
+              </Text>
             </ProductDetails>
 
             <AddToCartButton onPress={() => onAddToCart(product)}>

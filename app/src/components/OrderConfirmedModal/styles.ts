@@ -1,4 +1,4 @@
-import styled from 'styled-components/native';
+import styled from "styled-components/native";
 
 export const Container = styled.View`
   background: #d73035;
@@ -13,5 +13,3 @@ export const OkButton = styled.TouchableOpacity`
   background: #ffffff;
   border-radius: 48px;
 `;
-
-

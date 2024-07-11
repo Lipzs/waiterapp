@@ -1,4 +1,4 @@
-import styled from 'styled-components/native';
+import styled from "styled-components/native";
 
 export const Overlay = styled.KeyboardAvoidingView`
   background: rgba(0, 0, 0, 0.6);
@@ -25,7 +25,7 @@ export const Form = styled.View`
 `;
 
 export const Input = styled.TextInput`
-  background: #FFFFFF;
+  background: #ffffff;
   border: 1px solid rgba(204, 204, 204, 0.5);
   border-radius: 8px;
   padding: 16px;

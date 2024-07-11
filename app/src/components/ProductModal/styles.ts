@@ -1,4 +1,4 @@
-import styled from 'styled-components/native';
+import styled from "styled-components/native";
 
 export const Image = styled.ImageBackground`
   width: 100%;
@@ -51,5 +51,3 @@ export const FooterContainer = styled.SafeAreaView`
 `;
 
 export const PriceContainer = styled.View``;
-
-
